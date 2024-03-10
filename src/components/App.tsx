@@ -115,9 +115,9 @@ function App(props: AppProps) {
                 <thead>
                   <tr>
                     <th scope="col">id</th>
-                    <th scope="col">brand</th>
-                    <th scope="col">price</th>
                     <th scope="col">product</th>
+                    <th scope="col">price</th>
+                    <th scope="col">brand</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -127,9 +127,9 @@ function App(props: AppProps) {
                     }) => (
                       <tr key={id}>
                         <td>{id}</td>
-                        <td>{brand}</td>
-                        <td>{price}</td>
                         <td>{product}</td>
+                        <td>{price}</td>
+                        <td>{brand}</td>
                       </tr>
                     ))}
                 </tbody>
