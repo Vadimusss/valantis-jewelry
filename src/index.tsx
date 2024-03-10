@@ -4,7 +4,7 @@ import { getFormatedUtcDate } from './utils.ts';
 import './scss/index.scss';
 import App from './components/App.tsx';
 
-const apiUrl = 'http://api.valantis.store:40000/';
+const apiUrl = 'https://api.valantis.store:41000/';
 const password = 'Valantis';
 const authString = MD5(`${password}_${getFormatedUtcDate()}`).toString();
 const maxProductsOnPage = 50;
