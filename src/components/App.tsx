@@ -6,32 +6,6 @@ import { getTotalPageCount, getDisplayedProductIds } from '../utils.ts';
 import Form from './Form.tsx';
 import Pagination from './Pagination.tsx';
 
-type AppProps = {
-  apiUrl: string;
-  authString: string;
-  maxProductsOnPage: number;
-};
-
-type Product = {
-  brand: string | null;
-  id: string;
-  price: number;
-  product: string;
-};
-
-type RequestBodyState = {
-  action: string;
-  params?: {
-    offset?: number;
-    limit?: number;
-    ids?: string[];
-    field?: string;
-    product?: string;
-    price?: number;
-    brand?: string;
-  }
-};
-
 function App(props: AppProps) {
   const { apiUrl, authString, maxProductsOnPage } = props;
 
@@ -127,32 +101,57 @@ function App(props: AppProps) {
   }, [currentPage]);
 
   return (
-    <div>
-      <Form setRequestBodyState={(newState) => setRequestBodyState(newState)} />
+    <div className="container px-4">
+      <div className="row mb-2">
+        <Form setRequestBodyState={(newState) => setRequestBodyState(newState)} />
+      </div>
       {isLoading && 'Loading...'}
       {!displayedProducts && 'no data'}
       {(displayedProducts && !isLoading) && (
         <>
-          <ul>
-            {displayedProducts
-              .map(({
-                brand, id, price, product,
-              }) => (
-                <li key={id}>{`${id} - ${brand} - ${price} - ${product}`}</li>
-              ))}
-          </ul>
-          <Pagination
-            onNextPageClick={handleNextPageClick}
-            onPrevPageClick={handlePrevPageClick}
-            disable={{
-              left: currentPage === 1,
-              right: currentPage === getTotalPageCount(productIds.length, maxProductsOnPage),
-            }}
-            nav={{
-              current: currentPage,
-              total: getTotalPageCount(productIds.length, maxProductsOnPage),
-            }}
-          />
+          <div className="row mb-2">
+            <div className="col">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">brand</th>
+                    <th scope="col">price</th>
+                    <th scope="col">product</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {displayedProducts
+                    .map(({
+                      brand, id, price, product,
+                    }) => (
+                      <tr key={id}>
+                        <td>{id}</td>
+                        <td>{brand}</td>
+                        <td>{price}</td>
+                        <td>{product}</td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div className="row mb-2">
+            <div className="col">
+              <Pagination
+                onNextPageClick={handleNextPageClick}
+                onPrevPageClick={handlePrevPageClick}
+                disable={{
+                  left: currentPage === 1,
+                  right: currentPage === getTotalPageCount(productIds.length, maxProductsOnPage),
+                }}
+                nav={{
+                  current: currentPage,
+                  total: getTotalPageCount(productIds.length, maxProductsOnPage),
+                }}
+              />
+            </div>
+          </div>
         </>
       )}
     </div>

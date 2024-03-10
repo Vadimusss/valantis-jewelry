@@ -1,18 +1,3 @@
-// import Styles from './index.module.css';
-
-type PaginationProps = {
-  onNextPageClick: () => void;
-  onPrevPageClick: () => void;
-  disable: {
-    left: boolean;
-    right: boolean;
-  };
-  nav?: {
-    current: number;
-    total: number;
-  };
-};
-
 function Pagination(props: PaginationProps) {
   const {
     nav, disable, onNextPageClick, onPrevPageClick,
@@ -31,11 +16,12 @@ function Pagination(props: PaginationProps) {
         type="button"
         onClick={handlePrevPageClick}
         disabled={disable.left}
+        className="btn btn-primary btn-sm"
       >
         {'<'}
       </button>
       {nav && (
-        <span>
+        <span className="mx-2">
           {nav.current}
           {' '}
           /
@@ -46,6 +32,7 @@ function Pagination(props: PaginationProps) {
         type="button"
         onClick={handleNextPageClick}
         disabled={disable.right}
+        className="btn btn-primary btn-sm"
       >
         {'>'}
       </button>
